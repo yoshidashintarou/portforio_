@@ -1,0 +1,15 @@
+<h2>マイページ</h2>
+
+
+<h2>画像</h2>
+<% if @user.image.attached? %>
+  <%= image_tag @user.image, size: "50x50" %>
+<% else %>
+  <%= image_tag 'no_image', size: "50x50" %>
+<% end %>
+
+<%= @user.name %>
+<%= @user.email %>
+
+<%= link_to "編集", edit_user_path(current_user) %>
+
