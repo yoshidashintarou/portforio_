@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -24,7 +24,10 @@
         <%= link_to "マイページ", user_path(current_user) %>
       </li>
       <li>
-        <%= link_to "投稿する", new_diary_path(current_user) %>
+        <%= link_to "投稿する", new_post_path(current_user) %>
+      </li>
+      <li>
+        <%= link_to "みんなの日記", posts_path %>
       </li>
       <% else %>
        <li>
