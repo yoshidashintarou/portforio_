@@ -1,0 +1,23 @@
+<div style="height: 1200px">
+  <h2>マイ日記</h2>
+
+  <% @posts.each do |post| %>
+    <div class="container">
+      <div class="row">
+        <div class="card" style="width: 1000px; height: 150px; border: 2px solid; margin: 10px;">
+          <%= post.created_at.strftime("%Y年%m月%d日") %>
+            <%= post.title %><br>
+            <%= post.body %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-4">
+           <font size="5"><%= paginate @posts %></font>
+      </div>
+    </div>
+  </div>
+
+</div>

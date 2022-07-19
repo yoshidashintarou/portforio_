@@ -1,22 +1,25 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def index
-    @users = User.all
+     @user = current_user
+     @posts = @user.post.page(params[:page])
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+    @posts = @user.post
   end
 
   def update
-    @user = current_user
+    @user = User.find(params[:id])
     if @user.update(user_params)
      redirect_to user_path
     else
@@ -25,9 +28,14 @@ class UsersController < ApplicationController
   end
 
 
+ 
+
 private
 def user_params
   params.require(:user).permit(:name, :email, :image)
 end
 
+def post_params
+    params.require(:post).permit(:title, :body)
+end
 end

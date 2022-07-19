@@ -1,16 +1,15 @@
 class PostsController < ApplicationController
 
-
   def new
     @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     if @post.save
-       @post.user = current_user
       flash[:notice] = "投稿できました"
-      redirect_to post_path(@post.id)
+      redirect_to users_path(@post.id)
     else
       render :new
     end
@@ -21,14 +20,21 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
-    @user = current_user
+    @posts = Post.page(params[:page]).per(3)
+    @users = User.all
   end
 
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to post_path
+  end
+  
+   
 
 private
   def post_params
-    params.require(:post).permit(:title, :body,)
+    params.require(:post).permit(:title, :body, :user_id)
   end
 
   def user_params

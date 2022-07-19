@@ -1,15 +1,44 @@
-<h2>マイページ</h2>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <br>
+      <h2>マイページ</h2>
+        <% if @user.image.attached? %>
+         <%= image_tag @user.image, size: "100x100", class: "rounded-circle", size: "100x100" %>
+        <% else %>
+          <%= image_tag 'no_image', size: "100x100" %>
+        <% end %>
+        <br><br>
+        <table border "1" style= "width: 400px; height: 50px; text-align: center">
+         <tr>
+            <td>
+               氏名
+            </td>
+            <td>
+              <%= @user.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+               メールアドレス
+            </td>
+            <td>
+              <%= @user.email %>
+            </td>
+          </tr>
+        </table>
+        <br>
+
+
+    <%= link_to "編集する", edit_user_path, class: "btn btn-info btn-sm btn-block mb-3" %>
+
+    <%= link_to "マイ日記", users_path ,class: "btn btn-warning btn-sm btn-block mb-3" %>
+
+     </div>
+   </div>
+ </div>
 
 
 
-<% if @user.image.attached? %>
-  <%= image_tag @user.image, size: "50x50" %>
-<% else %>
-  <%= image_tag 'no_image', size: "50x50" %>
-<% end %>
 
-<%= @user.name %>
-<%= @user.email %>
-<%= link_to "マイ日記", post_path(current_user) %>
-<%= link_to "編集", edit_user_path(current_user) %>
 
