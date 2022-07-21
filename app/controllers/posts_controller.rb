@@ -15,9 +15,13 @@ class PostsController < ApplicationController
     end
   end
 
+
   def show
-    @post = Post.find(params[:id])
+    @post = current_user(post_params)
+    @comment = Comment.new
+    @comments = @post.comments
   end
+
 
   def index
     @posts = Post.page(params[:page]).per(3)
@@ -29,8 +33,8 @@ class PostsController < ApplicationController
     post.destroy
     redirect_to post_path
   end
-  
-   
+
+
 
 private
   def post_params
