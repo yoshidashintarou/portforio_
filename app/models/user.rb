@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-
    def self.looks(search, word)
       if search == "perfect_match"
         @user = User.where("name LIKE?", "#{word}")
